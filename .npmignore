@@ -5,4 +5,5 @@ coverage/
 .nvmrc
 .travis.yml
 .babelrc
+.nyc_output/
 npm-debug.log

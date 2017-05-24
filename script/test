@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+export PATH="./node_modules/.bin:$PATH"
+
+nyc --report=text                    \
+    --report=lcov                    \
+    mocha \
+    "tests/**/*.test.js"             \
+    --recursive                      \
+    --require babel-core/register

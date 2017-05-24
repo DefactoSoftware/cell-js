@@ -44,7 +44,16 @@ describe("Builder", () => {
       const Cell = { name: "Cell" };
       Builder.register(Cell);
 
-      expect(Builder.availableCells).to.contain(Cell);
+      expect(Builder.availableCells).to.eql({ Cell });
+    });
+
+    it("ignores registering an existing cell", () => {
+      const Cell = { name: "Cell" };
+
+      Builder.availableCells[Cell.name] = Cell;
+      Builder.register(Cell);
+
+      expect(Builder.availableCells).to.eql({ Cell });
     });
   });
 

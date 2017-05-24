@@ -15,7 +15,7 @@ export default {
    * The cells classes that are registered the the register method
    * @type {Object[]}
    */
-  availableCells: [],
+  availableCells: {},
 
   /**
    * Register a new cell class
