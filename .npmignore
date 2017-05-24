@@ -1,0 +1,8 @@
+node_modules/
+coverage/
+.eslintrc
+.gitignore
+.nvmrc
+.travis.yml
+.babelrc
+npm-debug.log
