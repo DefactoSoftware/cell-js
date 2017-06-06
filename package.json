@@ -1,5 +1,5 @@
 {
-  "name": "cells.js",
+  "name": "cells-js",
   "version": "0.0.1",
   "description": "Simple solution for binding Javascript to specific templates or side server components",
   "main": "./lib/cells.js",
@@ -25,9 +25,9 @@
   "author": "Jesse Dijkstra <mail@jessedijkstra.nl>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jessedijkstra/cells.js/issues"
+    "url": "https://github.com/jessedijkstra/cells-js/issues"
   },
-  "homepage": "https://github.com/jessedijkstra/cell.js#readme",
+  "homepage": "https://github.com/jessedijkstra/cell-js#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
