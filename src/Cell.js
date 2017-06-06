@@ -1,4 +1,4 @@
-import isElement from "./helpers/isElement";
+import isElement from "./helpers/is_element";
 
 /**
  * Class representing a cell which

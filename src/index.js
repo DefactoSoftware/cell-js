@@ -1,5 +1,5 @@
-import BuilderClass from "./Builder";
-import CellClass from "./Cell";
+import BuilderClass from "./builder";
+import CellClass from "./cell";
 
 export const Builder = BuilderClass;
 export const Cell = CellClass;
