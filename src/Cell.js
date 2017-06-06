@@ -108,6 +108,6 @@ export default class Cell {
   queryAll(selector) {
     const { element } = this;
 
-    return element.querySelectorAll(selector);
+    return [].slice.call(element.querySelectorAll(selector));
   }
 }
