@@ -1,8 +1,8 @@
 {
   "name": "cells-js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple solution for binding Javascript to specific templates or side server components",
-  "main": "./lib/cells.js",
+  "main": "dist/",
   "scripts": {
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "eslint src/**/*.js",
