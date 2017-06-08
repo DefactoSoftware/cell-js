@@ -22,10 +22,14 @@ describe("Cell", () => {
     document = newDocument;
   });
 
-  function createCellElement(params) {
+  function createCellElement(params = {}, prefix) {
     const element = document.createElement("div");
 
     element.setAttribute("data-cell-params", params);
+
+    if (prefix) {
+      element.setAttribute("data-cell-css-prefix", prefix);
+    }
 
     return element;
   }
@@ -48,6 +52,13 @@ describe("Cell", () => {
       const cell = new Cell(element);
 
       expect(cell.params).to.deep.equal({ name: "Jesse" });
+    });
+
+    it("sets the CSS prefix when a valid prefix has been set", () => {
+      const element = createCellElement(`{}`, "CSS");
+      const cell = new Cell(element);
+
+      expect(cell.prefix).to.equal("CSS");
     });
 
     it("throws when invalid parameters have been set", () => {
@@ -137,19 +148,19 @@ describe("Cell", () => {
     });
   });
 
-  describe("#className()", () => {
-    it("returns the name without a child", () => {
-      const element = createCellElement("{}");
+  describe("#cssPrefix()", () => {
+    it("returns a namespaced className", () => {
+      const element = createCellElement("{}", "css");
       const cell = new Cell(element);
 
-      expect(cell.className()).to.eq(".Cell");
+      expect(cell.cssPrefix("child")).to.eq(".css_child");
     });
 
-    it("returns a namespaced className for child", () => {
+    it("returns no namespaced className if prefix not set", () => {
       const element = createCellElement("{}");
       const cell = new Cell(element);
 
-      expect(cell.className("child")).to.eq(".Cell__child");
+      expect(cell.cssPrefix("child")).to.eq(".child");
     });
   });
 
@@ -171,7 +182,7 @@ describe("Cell", () => {
   describe("#queryAll()", () => {
     it("query's the element", () => {
       const element = createCellElement("{}");
-      const querySelectorAll = stub(element, "querySelectorAll");
+      const querySelectorAll = stub(element, "querySelectorAll", () => []);
 
       const cell = new Cell(element);
 

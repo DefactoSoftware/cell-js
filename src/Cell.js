@@ -14,6 +14,10 @@ export default class Cell {
     return JSON.parse(params || "{}");
   }
 
+  static getCSSPrefix(element) {
+    return element.getAttribute("data-cell-css-prefix");
+  }
+
   /**
    * Create a new cell by adding an element. The element requires
    * a data attr params to set its params.
@@ -29,6 +33,7 @@ export default class Cell {
     this.element = element;
     this.name = this.constructor.name;
     this.params = Cell.getParameters(element);
+    this.prefix = Cell.getCSSPrefix(element) || "";
   }
 
   /**
@@ -70,17 +75,17 @@ export default class Cell {
   /**
    * Constructs a namespaced className
    *
-   * @param  {String} child
+   * @param  {String} target
    * @return {String}
    */
-  className(child) {
-    const { name } = this;
+  cssPrefix(target) {
+    const { prefix } = this;
 
-    if (!child) {
-      return `.${name}`;
+    if (prefix) {
+      return `.${prefix}_${target}`;
     }
 
-    return `.${name}__${child}`;
+    return `.${target}`;
   }
 
   /**

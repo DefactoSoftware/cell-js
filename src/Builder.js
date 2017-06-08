@@ -101,7 +101,7 @@ export default {
    * @return {Cells[]}
    */
   findByElement(element, cells = this.activeCells) {
-    return (cells || this.activeCells).find(cell => cell.element === element);
+    return cells.find(cell => cell.element === element);
   },
 
   getCellName(element) {
