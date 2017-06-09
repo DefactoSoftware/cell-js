@@ -28,7 +28,7 @@ describe("Cell", () => {
     element.setAttribute("data-cell-params", params);
 
     if (prefix) {
-      element.setAttribute("data-cell-css-prefix", prefix);
+      element.setAttribute("data-cell-prefix", prefix);
     }
 
     return element;
@@ -54,11 +54,11 @@ describe("Cell", () => {
       expect(cell.params).to.deep.equal({ name: "Jesse" });
     });
 
-    it("sets the CSS prefix when a valid prefix has been set", () => {
+    it("sets the prefix when a valid prefix has been set", () => {
       const element = createCellElement(`{}`, "CSS");
       const cell = new Cell(element);
 
-      expect(cell.prefix).to.equal("CSS");
+      expect(cell._prefix).to.equal("CSS");
     });
 
     it("throws when invalid parameters have been set", () => {
@@ -148,19 +148,19 @@ describe("Cell", () => {
     });
   });
 
-  describe("#cssPrefix()", () => {
+  describe("#prefix()", () => {
     it("returns a namespaced className", () => {
-      const element = createCellElement("{}", "css");
+      const element = createCellElement("{}", "css_");
       const cell = new Cell(element);
 
-      expect(cell.cssPrefix("child")).to.eq(".css_child");
+      expect(cell.prefix("child")).to.eq("css_child");
     });
 
     it("returns no namespaced className if prefix not set", () => {
       const element = createCellElement("{}");
       const cell = new Cell(element);
 
-      expect(cell.cssPrefix("child")).to.eq(".child");
+      expect(cell.prefix("child")).to.eq("child");
     });
   });
 
@@ -179,6 +179,21 @@ describe("Cell", () => {
     });
   });
 
+  describe("#queryScoped()", () => {
+    it("query's the element", () => {
+      const element = createCellElement("{}", "css_");
+      const querySelector = stub(element, "querySelector");
+
+      const cell = new Cell(element);
+
+      cell.queryScoped("name");
+
+      expect(querySelector).to.have.been.calledWith(".css_name");
+
+      querySelector.restore();
+    });
+  });
+
   describe("#queryAll()", () => {
     it("query's the element", () => {
       const element = createCellElement("{}");
@@ -192,6 +207,24 @@ describe("Cell", () => {
       cell.queryAll(".name");
 
       expect(querySelectorAll).to.have.been.calledWith(".name");
+
+      querySelectorAll.restore();
+    });
+  });
+
+  describe("#queryScopedAll()", () => {
+    it("query's the element", () => {
+      const element = createCellElement("{}", "css_");
+      const querySelectorAll = stub(
+        element,
+        "querySelectorAll"
+      ).callsFake(() => []);
+
+      const cell = new Cell(element);
+
+      cell.queryScopedAll("name");
+
+      expect(querySelectorAll).to.have.been.calledWith(".css_name");
 
       querySelectorAll.restore();
     });

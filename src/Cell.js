@@ -14,8 +14,8 @@ export default class Cell {
     return JSON.parse(params || "{}");
   }
 
-  static getCSSPrefix(element) {
-    return element.getAttribute("data-cell-css-prefix");
+  static getPrefix(element) {
+    return element.getAttribute("data-cell-prefix");
   }
 
   /**
@@ -33,7 +33,7 @@ export default class Cell {
     this.element = element;
     this.name = this.constructor.name;
     this.params = Cell.getParameters(element);
-    this.prefix = Cell.getCSSPrefix(element) || "";
+    this._prefix = Cell.getPrefix(element) || "";
   }
 
   /**
@@ -78,14 +78,14 @@ export default class Cell {
    * @param  {String} target
    * @return {String}
    */
-  cssPrefix(target) {
-    const { prefix } = this;
+  prefix(target) {
+    const { _prefix } = this;
 
-    if (prefix) {
-      return `.${prefix}_${target}`;
+    if (_prefix) {
+      return `${_prefix}${target}`;
     }
 
-    return `.${target}`;
+    return `${target}`;
   }
 
   /**
@@ -102,6 +102,10 @@ export default class Cell {
     return element.querySelector(selector);
   }
 
+  queryScoped(target) {
+    return this.query(`.${this.prefix(target)}`);
+  }
+
   /**
    * jQuery like method to call custom class name selectors on the object by
    * automatically namespacing them to ensure the elements are unique enough
@@ -114,5 +118,9 @@ export default class Cell {
     const { element } = this;
 
     return [].slice.call(element.querySelectorAll(selector));
+  }
+
+  queryScopedAll(target) {
+    return this.queryAll(`.${this.prefix(target)}`);
   }
 }
