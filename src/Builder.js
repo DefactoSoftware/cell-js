@@ -80,7 +80,11 @@ export default {
       const foundCell = this.findByElement(element);
 
       if (!cellConstructor) {
-        throw new Error(`Cell with name ${cellName} not found`);
+        console &&
+          console.warn &&
+          console.warn(`Cell with name ${cellName} not found`);
+
+        return;
       }
 
       if (foundCell) {

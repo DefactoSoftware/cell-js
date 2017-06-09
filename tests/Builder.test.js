@@ -122,12 +122,14 @@ describe("Builder", () => {
       expect(activeCell.reload).to.have.been.calledWith(activeElement);
     });
 
-    it("throws if a Cell doesn't exist ", () => {
+    it("shows a warning if a cell doesn't exist", () => {
       const newElement = createCellElement("{}");
 
-      expect(() => Builder.findAndBuild()).to.throw(
-        "Cell with name Cell not found"
-      );
+      const warn = stub(console, "warn");
+
+      Builder.findAndBuild();
+
+      expect(warn).to.have.been.calledWith("Cell with name Cell not found");
     });
   });
 });
