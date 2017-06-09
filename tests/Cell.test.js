@@ -182,7 +182,10 @@ describe("Cell", () => {
   describe("#queryAll()", () => {
     it("query's the element", () => {
       const element = createCellElement("{}");
-      const querySelectorAll = stub(element, "querySelectorAll", () => []);
+      const querySelectorAll = stub(
+        element,
+        "querySelectorAll"
+      ).callsFake(() => []);
 
       const cell = new Cell(element);
 
