@@ -31,7 +31,6 @@ export default class Cell {
     }
 
     this.element = element;
-    this.name = this.constructor.name;
     this.params = Cell.getParameters(element);
     this._prefix = Cell.getPrefix(element) || "";
   }
