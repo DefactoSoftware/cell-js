@@ -1,6 +1,6 @@
 {
   "name": "cells-js",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Simple solution for binding Javascript to specific templates or side server components",
   "main": "dist/",
   "scripts": {
