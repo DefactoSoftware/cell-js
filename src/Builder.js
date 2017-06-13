@@ -74,27 +74,29 @@ export default {
    * @return {Cell[]}
    */
   findAndBuild() {
-    return [].map.call(document.querySelectorAll("[data-cell]"), element => {
-      const cellName = this.getCellName(element);
-      const cellConstructor = this.availableCells[cellName];
-      const foundCell = this.findByElement(element);
+    return [].map
+      .call(document.querySelectorAll("[data-cell]"), element => {
+        const cellName = this.getCellName(element);
+        const cellConstructor = this.availableCells[cellName];
+        const foundCell = this.findByElement(element);
 
-      if (!cellConstructor) {
-        console &&
-          console.warn &&
-          console.warn(`Cell with name ${cellName} not found`);
+        if (!cellConstructor) {
+          console &&
+            console.warn &&
+            console.warn(`Cell with name ${cellName} not found`);
 
-        return;
-      }
+          return;
+        }
 
-      if (foundCell) {
-        foundCell.reload(element);
+        if (foundCell) {
+          foundCell.reload(element);
 
-        return foundCell;
-      }
+          return foundCell;
+        }
 
-      return new cellConstructor(element);
-    });
+        return new cellConstructor(element);
+      })
+      .filter(cell => cell);
   },
 
   /**
