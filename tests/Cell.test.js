@@ -66,13 +66,6 @@ describe("Cell", () => {
 
       expect(() => new Cell(element)).to.throw(SyntaxError, /Unexpected token/);
     });
-
-    it("it sets the name of the contructor", () => {
-      const element = createCellElement("{}");
-      const cell = new Cell(element);
-
-      expect(cell.name).to.equal("Cell");
-    });
   });
 
   describe("#reload()", () => {

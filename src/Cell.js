@@ -18,7 +18,7 @@ export default class Cell {
     return element.getAttribute("data-cell-prefix");
   }
 
-  name = "Cell";
+  static constructorName = "Cell";
 
   /**
    * Create a new cell by adding an element. The element requires

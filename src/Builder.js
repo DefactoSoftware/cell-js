@@ -22,7 +22,7 @@ export default {
    * @param  {Cell} cell
    */
   register(cell) {
-    const cellName = cell.name;
+    const cellName = cell.constructorName;
 
     if (this.availableCells[cellName]) {
       return;

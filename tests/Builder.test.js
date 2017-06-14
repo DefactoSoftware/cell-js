@@ -41,16 +41,16 @@ describe("Builder", () => {
 
   describe("#register()", () => {
     it("registers a new cell", () => {
-      const Cell = { name: "Cell" };
+      const Cell = { constructorName: "Cell" };
       Builder.register(Cell);
 
       expect(Builder.availableCells).to.eql({ Cell });
     });
 
     it("ignores registering an existing cell", () => {
-      const Cell = { name: "Cell" };
+      const Cell = { constructorName: "Cell" };
 
-      Builder.availableCells[Cell.name] = Cell;
+      Builder.availableCells[Cell.constructorName] = Cell;
       Builder.register(Cell);
 
       expect(Builder.availableCells).to.eql({ Cell });
