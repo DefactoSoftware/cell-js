@@ -18,17 +18,16 @@ export default {
   availableCells: {},
 
   /**
-   * Register a new cell class
+   * Register a new cell class under target name
    * @param  {Cell} cell
+   * @param  {String} cellName
    */
-  register(cell) {
-    const cellName = cell.constructorName;
-
-    if (this.availableCells[cellName]) {
+  register(cell, name) {
+    if (this.availableCells[name]) {
       return;
     }
 
-    this.availableCells[cellName] = cell;
+    this.availableCells[name] = cell;
   },
 
   /**
