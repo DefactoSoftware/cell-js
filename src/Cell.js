@@ -44,8 +44,6 @@ export default class Cell {
    * @return {HTMLElement}
    */
   reload(element = this.element) {
-    this.constructor(element);
-
     this.onReload && this.onReload(element);
 
     return element;

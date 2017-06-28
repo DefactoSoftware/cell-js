@@ -69,22 +69,6 @@ describe("Cell", () => {
   });
 
   describe("#reload()", () => {
-    it("calls the #contructor() with the new element", () => {
-      const element = createCellElement("{}");
-      const newElement = createCellElement("{}");
-      const cell = new Cell(element);
-
-      const constructor = stub(cell, "constructor");
-
-      cell.constructor = constructor;
-
-      cell.reload(newElement);
-
-      expect(constructor).to.have.been.calledWith(newElement);
-
-      constructor.restore();
-    });
-
     it("calls the #onReload() hook if set", () => {
       const element = createCellElement("{}");
       const cell = new Cell(element);
