@@ -44,6 +44,15 @@ export default {
   reload() {
     const found = this.findAndBuild();
 
+    found.forEach(cell => {
+      if (cell.initialized) {
+        cell.reload(cell.element);
+      }
+
+      cell.initialized = true;
+      cell.initialize && cell.initialize(cell.element);
+    });
+
     this.destroyOrphans(found);
 
     this.activeCells = found;
@@ -87,13 +96,7 @@ export default {
           return;
         }
 
-        if (foundCell) {
-          foundCell.reload(element);
-
-          return foundCell;
-        }
-
-        return new cellConstructor(element);
+        return foundCell || new cellConstructor(element);
       })
       .filter(cell => cell);
   },

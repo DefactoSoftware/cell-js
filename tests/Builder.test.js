@@ -71,7 +71,16 @@ describe("Builder", () => {
 
   describe("#reload()", () => {
     it("calls findAndBuild and resets activeCells", () => {
-      const found = ["foo", "bar"];
+      const existingCell = {
+        reload: stub(),
+        initialized: true
+      };
+
+      const newCell = {
+        initialize: stub()
+      };
+
+      const found = [existingCell, newCell];
       const findAndBuild = stub(Builder, "findAndBuild").returns(found);
       const destroyOrphans = stub(Builder, "destroyOrphans");
 
@@ -79,6 +88,9 @@ describe("Builder", () => {
 
       expect(destroyOrphans).to.have.been.calledWith(found);
       expect(Builder.activeCells).to.eq(found);
+
+      expect(existingCell.reload).to.have.been.called;
+      expect(newCell.initialize).to.have.been.called;
 
       findAndBuild.restore();
       destroyOrphans.restore();
@@ -111,15 +123,14 @@ describe("Builder", () => {
       const Cell = stub().returns(newCell);
 
       const activeElement = createCellElement("{}");
-      const activeCell = { element: activeElement, reload: stub() };
+      const activeCell = {
+        element: activeElement
+      };
 
       Builder.availableCells = { Cell };
       Builder.activeCells = [activeCell];
 
       expect(Builder.findAndBuild()).to.eql([newCell, activeCell]);
-
-      expect(Cell).to.have.been.calledWith(newElement);
-      expect(activeCell.reload).to.have.been.calledWith(activeElement);
     });
 
     it("shows a warning if a cell doesn't exist", () => {
