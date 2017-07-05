@@ -1,9 +1,10 @@
+import MicroEvent from "microevent";
 import isElement from "./helpers/is_element";
 
 /**
  * Class representing a cell which
  */
-export default class Cell {
+export default class Cell extends MicroEvent {
   /**
    * Parses the cell parameters and returns the JSON
    * @param  {HTMLElement} element
@@ -28,6 +29,8 @@ export default class Cell {
    * @return {Cell}
    */
   constructor(element) {
+    super(...arguments);
+
     if (!isElement(element)) {
       throw new Error("Cell requires a valid DOM element to initialize");
     }
@@ -35,6 +38,18 @@ export default class Cell {
     this.element = element;
     this.params = Cell.getParameters(element);
     this._prefix = Cell.getPrefix(element) || "";
+  }
+
+  addEventListener(event, callback) {
+    this.bind(event, callback);
+  }
+
+  removeEventListener(event, callback) {
+    this.unbind(event, callback);
+  }
+
+  dispatchEvent(event, ...args) {
+    this.trigger(event, ...args);
   }
 
   /**

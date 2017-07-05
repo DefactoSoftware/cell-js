@@ -4,6 +4,7 @@ import { JSDOM } from "jsdom";
 import chai, { expect } from "chai";
 
 import Cell from "../src/Cell";
+import MicroEvent from "microevent";
 
 chai.use(sinonChai);
 
@@ -204,6 +205,22 @@ describe("Cell", () => {
       expect(querySelectorAll).to.have.been.calledWith(".css_name");
 
       querySelectorAll.restore();
+    });
+  });
+
+  describe("MicroEvent API", () => {
+    it("calls the MicroEvent API", () => {
+      const callback = stub();
+      const element = createCellElement("{}");
+      const cell = new Cell(element);
+
+      cell.addEventListener("change", callback);
+      cell.dispatchEvent("change", "value");
+      cell.removeEventListener("change", callback);
+      cell.dispatchEvent("change", "anothervalue");
+
+      expect(callback).to.have.been.calledOnce;
+      expect(callback).to.have.been.calledWithExactly("value");
     });
   });
 });
