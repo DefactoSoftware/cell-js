@@ -43,6 +43,9 @@ export default {
    */
   reload() {
     const found = this.findAndBuild();
+    const previous = this.activeCells;
+
+    this.activeCells = found;
 
     found.forEach(cell => {
       if (cell.initialized) {
@@ -53,19 +56,18 @@ export default {
       cell.initialize && cell.initialize(cell.element);
     });
 
-    this.destroyOrphans(found);
-
-    this.activeCells = found;
+    this.destroyOrphans(previous, found);
   },
 
   /**
    * Destroy the orphan cells by inputting the cells currently found on the page
    *
-   * @param  {Cell[]} found Cells that are currently present on the page
-   * @return {Cell[]}       Cells that are marked for removal
+   * @param  {Cell[]} previous Cells that are were previously present on the page
+   * @param  {Cell[]} found    Cells that are currently present on the page
+   * @return {Cell[]}          Cells that are marked for removal
    */
-  destroyOrphans(found) {
-    return this.activeCells.filter(cell => {
+  destroyOrphans(previous, found) {
+    return previous.filter(cell => {
       if (!this.findByElement(cell.element, found)) {
         cell.destroy();
 

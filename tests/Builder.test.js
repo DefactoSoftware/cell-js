@@ -80,13 +80,15 @@ describe("Builder", () => {
         initialize: stub()
       };
 
+      const previous = [existingCell];
       const found = [existingCell, newCell];
       const findAndBuild = stub(Builder, "findAndBuild").returns(found);
       const destroyOrphans = stub(Builder, "destroyOrphans");
 
+      Builder.activeCells = previous;
       Builder.reload();
 
-      expect(destroyOrphans).to.have.been.calledWith(found);
+      expect(destroyOrphans).to.have.been.calledWith(previous, found);
       expect(Builder.activeCells).to.eq(found);
 
       expect(existingCell.reload).to.have.been.called;
@@ -106,11 +108,11 @@ describe("Builder", () => {
         element: inactiveElement,
         destroy: spy()
       };
-      const found = [activeCell];
 
-      Builder.activeCells = [activeCell, inactiveCell];
+      expect(Builder.destroyOrphans([inactiveCell], [activeCell])).to.eql([
+        inactiveCell
+      ]);
 
-      expect(Builder.destroyOrphans(found)).to.eql([inactiveCell]);
       expect(activeCell.destroy).to.not.have.been.called;
       expect(inactiveCell.destroy).to.have.been.called;
     });
