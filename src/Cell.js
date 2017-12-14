@@ -21,7 +21,9 @@ export default class Cell extends MicroEvent {
 
   static getElements(element) {
     const cellId = element.getAttribute("data-cell-id");
-    const elements = element.querySelectorAll(`[data-cell-id=${cellId}]`);
+    const elements = element.querySelectorAll(
+      `[data-cell-parent-id=${cellId}]`
+    );
 
     return [...elements].reduce((acc, element) => {
       const name = element.getAttribute("data-cell-element");
