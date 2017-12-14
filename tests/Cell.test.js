@@ -39,7 +39,7 @@ describe("Cell", () => {
   function createCellChildElement(id, name) {
     const element = document.createElement("div");
 
-    element.setAttribute("data-cell-id", id);
+    element.setAttribute("data-cell-parent-id", id);
     element.setAttribute("data-cell-element", name);
 
     return element;
@@ -72,7 +72,7 @@ describe("Cell", () => {
       expect(cell._prefix).to.equal("CSS");
     });
 
-    it("collects elements", () => {
+    it("collects child elements", () => {
       const element = createCellElement(`{}`, "CSS");
       const header = createCellChildElement("foo", "header");
       const articles = [
