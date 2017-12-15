@@ -9,7 +9,7 @@
     "test:lint": "eslint src/**/*.js",
     "test:unit": "script/test",
     "compile": "babel -d dist/ src/",
-    "prepublish": "npm run compile"
+    "prepare": "npm run compile"
   },
   "repository": {
     "type": "git",
