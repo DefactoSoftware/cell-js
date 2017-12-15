@@ -19,6 +19,23 @@ export default class Cell extends MicroEvent {
     return element.getAttribute("data-cell-prefix");
   }
 
+  static getElements(element) {
+    const cellId = element.getAttribute("data-cell-id");
+    const elements = element.querySelectorAll(
+      `[data-cell-parent-id="${cellId}"]`
+    );
+
+    return [...elements].reduce((acc, element) => {
+      const name = element.getAttribute("data-cell-element");
+
+      acc[name] = acc[name] || [];
+
+      acc[name].push(element);
+
+      return acc;
+    }, {});
+  }
+
   static constructorName = "Cell";
 
   /**
@@ -36,6 +53,7 @@ export default class Cell extends MicroEvent {
     }
 
     this.element = element;
+    this.elements = Cell.getElements(element);
     this.params = Cell.getParameters(element);
     this._prefix = Cell.getPrefix(element) || "";
   }
@@ -93,10 +111,10 @@ export default class Cell extends MicroEvent {
    * @return {String}
    */
   prefix(target) {
-    const { _prefix } = this;
+    const { _prefix: prefix } = this;
 
-    if (_prefix) {
-      return `${_prefix}${target}`;
+    if (prefix) {
+      return `${prefix}${target}`;
     }
 
     return `${target}`;

@@ -27,10 +27,20 @@ describe("Cell", () => {
     const element = document.createElement("div");
 
     element.setAttribute("data-cell-params", params);
+    element.setAttribute("data-cell-id", "foo");
 
     if (prefix) {
       element.setAttribute("data-cell-prefix", prefix);
     }
+
+    return element;
+  }
+
+  function createCellChildElement(id, name) {
+    const element = document.createElement("div");
+
+    element.setAttribute("data-cell-parent-id", id);
+    element.setAttribute("data-cell-element", name);
 
     return element;
   }
@@ -60,6 +70,33 @@ describe("Cell", () => {
       const cell = new Cell(element);
 
       expect(cell._prefix).to.equal("CSS");
+    });
+
+    it("collects child elements", () => {
+      const element = createCellElement(`{}`, "CSS");
+      const header = createCellChildElement("foo", "header");
+      const articles = [
+        createCellChildElement("foo", "articles"),
+        createCellChildElement("foo", "articles")
+      ];
+      const footer = createCellChildElement("foo", "footer");
+
+      const notChildElement = createCellChildElement("bar", "articles");
+
+      element.appendChild(header);
+
+      articles.forEach(article => element.appendChild(article));
+
+      element.appendChild(footer);
+      element.appendChild(notChildElement);
+
+      const cell = new Cell(element);
+
+      expect(cell.elements).to.eql({
+        header: [header],
+        articles,
+        footer: [footer]
+      });
     });
 
     it("throws when invalid parameters have been set", () => {
@@ -175,10 +212,9 @@ describe("Cell", () => {
   describe("#queryAll()", () => {
     it("query's the element", () => {
       const element = createCellElement("{}");
-      const querySelectorAll = stub(
-        element,
-        "querySelectorAll"
-      ).callsFake(() => []);
+      const querySelectorAll = stub(element, "querySelectorAll").callsFake(
+        () => []
+      );
 
       const cell = new Cell(element);
 
@@ -193,10 +229,9 @@ describe("Cell", () => {
   describe("#queryScopedAll()", () => {
     it("query's the element", () => {
       const element = createCellElement("{}", "css_");
-      const querySelectorAll = stub(
-        element,
-        "querySelectorAll"
-      ).callsFake(() => []);
+      const querySelectorAll = stub(element, "querySelectorAll").callsFake(
+        () => []
+      );
 
       const cell = new Cell(element);
 
