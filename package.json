@@ -20,9 +20,9 @@
   "author": "Jesse Dijkstra <mail@jessedijkstra.nl>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/defactosoftware/cells-js/issues"
+    "url": "https://github.com/defactosoftware/cell-js/issues"
   },
-  "homepage": "https://github.com/defactosoftware/cells-js#readme",
+  "homepage": "https://github.com/defactosoftware/cell-js#readme",
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^4.13.1",
