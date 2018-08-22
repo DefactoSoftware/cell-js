@@ -93,6 +93,7 @@ describe("Builder", () => {
 
       expect(existingCell.reload).to.have.been.called;
       expect(newCell.initialize).to.have.been.called;
+      expect(newCell.initialize).have.been.calledAfter(destroyOrphans);
 
       findAndBuild.restore();
       destroyOrphans.restore();
