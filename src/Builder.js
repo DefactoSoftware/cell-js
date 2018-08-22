@@ -47,6 +47,8 @@ export default {
 
     this.activeCells = found;
 
+    this.destroyOrphans(previous, found);
+
     found.forEach(cell => {
       if (cell.initialized) {
         cell.reload(cell.element);
@@ -55,8 +57,6 @@ export default {
       cell.initialized = true;
       cell.initialize && cell.initialize(cell.element);
     });
-
-    this.destroyOrphans(previous, found);
   },
 
   /**
