@@ -1,6 +1,6 @@
 {
   "name": "@defacto/cell-js",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description":
     "Simple solution for binding Javascript to specific templates or side server components",
   "main": "dist/",
