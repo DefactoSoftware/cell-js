@@ -38,8 +38,7 @@ export default {
   },
 
   /**
-   * Inititialize new cells, teardown the removed cells and reload existing
-   * cells.
+   * Inititialize new cells, teardown the removed cells and reload existing cells
    */
   reload() {
     const found = this.findAndBuild();
@@ -52,10 +51,10 @@ export default {
     found.forEach(cell => {
       if (cell.initialized) {
         cell.reload(cell.element);
+      } else {
+        cell.initialize && cell.initialize(cell.element);
+        cell.initialized = true;
       }
-
-      cell.initialized = true;
-      cell.initialize && cell.initialize(cell.element);
     });
   },
 
