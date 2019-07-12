@@ -1,8 +1,7 @@
 {
   "name": "@defacto/cell-js",
-  "version": "1.0.0",
-  "description":
-    "Simple solution for binding Javascript to specific templates or side server components",
+  "version": "1.1.0",
+  "description": "Simple solution for binding Javascript to specific templates or side server components",
   "main": "dist/",
   "scripts": {
     "test": "npm run test:lint && npm run test:unit",
@@ -13,35 +12,57 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blendle/emailcorrect.git"
+    "url": "git+https://github.com/DefactoSoftware/cell-js.git"
   },
-  "files": ["dist", "src"],
-  "keywords": ["component", "template"],
-  "author": "Jesse Dijkstra <mail@jessedijkstra.nl>",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "keywords": [
+    "component",
+    "template"
+  ],
+  "author": "Matthijs Kuiper <matthijs@defacto.nl>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/defactosoftware/cell-js/issues"
+    "url": "https://github.com/DefactoSoftware/cell-js/issues"
   },
-  "homepage": "https://github.com/defactosoftware/cell-js#readme",
+  "homepage": "https://github.com/DefactoSoftware/cell-js#readme",
   "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^4.13.1",
-    "eslint-plugin-prettier": "^2.1.1",
-    "jsdom": "^11.0.0",
-    "mocha": "^3.4.1",
-    "mocha-jsdom": "^1.1.0",
-    "nyc": "^10.3.2",
-    "prettier": "^1.9.2",
-    "prettier-eslint": "^8.3.1",
-    "sinon": "^2.3.1",
-    "sinon-chai": "^2.10.0"
+    "chai": "^4.2.0",
+    "eslint": "^6.0.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jsdom": "^15.1.1",
+    "mocha": "^6.1.4",
+    "mocha-jsdom": "^2.0.0",
+    "nyc": "^14.1.1",
+    "prettier": "^1.18.2",
+    "prettier-eslint": "^9.0.0",
+    "sinon": "^7.3.2",
+    "sinon-chai": "^3.3.0"
   },
   "dependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-eslint": "^8.0.3",
-    "babel-preset-env": "^1.5.1",
-    "babel-preset-stage-0": "^6.24.1",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-do-expressions": "^7.0.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-function-bind": "^7.0.0",
+    "@babel/plugin-proposal-function-sent": "^7.0.0",
+    "@babel/plugin-proposal-json-strings": "^7.0.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.4.4",
+    "babel-eslint": "^9.0.0",
     "microevent": "^1.0.0"
   }
 }
