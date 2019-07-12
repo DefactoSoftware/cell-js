@@ -11,4 +11,4 @@ nyc --report=text                    \
     mocha \
     "tests/**/*.test.js"             \
     --recursive                      \
-    --require babel-core/register
+    --require @babel/register
