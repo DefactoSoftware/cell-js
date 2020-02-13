@@ -10,10 +10,7 @@
     "compile": "babel -d dist/ src/",
     "prepare": "npm run compile"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DefactoSoftware/cell-js.git"
-  },
+  "repository": "github:DefactoSoftware/cell-js",
   "files": [
     "dist",
     "src"
@@ -29,19 +26,6 @@
   },
   "homepage": "https://github.com/DefactoSoftware/cell-js#readme",
   "devDependencies": {
-    "chai": "^4.2.0",
-    "eslint": "^6.0.1",
-    "eslint-plugin-prettier": "^3.1.0",
-    "jsdom": "^15.1.1",
-    "mocha": "^6.1.4",
-    "mocha-jsdom": "^2.0.0",
-    "nyc": "^14.1.1",
-    "prettier": "^1.18.2",
-    "prettier-eslint": "^9.0.0",
-    "sinon": "^7.3.2",
-    "sinon-chai": "^3.3.0"
-  },
-  "dependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
@@ -63,6 +47,19 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/register": "^7.4.4",
     "babel-eslint": "^9.0.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.0.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jsdom": "^15.1.1",
+    "mocha": "^6.1.4",
+    "mocha-jsdom": "^2.0.0",
+    "nyc": "^14.1.1",
+    "prettier": "^1.18.2",
+    "prettier-eslint": "^9.0.0",
+    "sinon": "^7.3.2",
+    "sinon-chai": "^3.3.0"
+  },
+  "dependencies": {
     "microevent": "^1.0.0"
   }
 }
