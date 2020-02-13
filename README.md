@@ -6,6 +6,12 @@ We use this alongside [ex_cell](https://github.com/DefactoSoftware/ex_cell), an 
 ## Installation
 
 ```
+npm install @defacto/cell-js
+```
+
+or
+
+```
 yarn add @defacto/cell-js
 ```
 
