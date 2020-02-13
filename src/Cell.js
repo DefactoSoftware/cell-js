@@ -101,6 +101,8 @@ export default class Cell extends MicroEvent {
 
     this.onDestroy && this.onDestroy(element);
 
+    this.destroyed = true;
+
     return element;
   }
 

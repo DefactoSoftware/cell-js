@@ -23,28 +23,6 @@ describe("Cell", () => {
     document = newDocument;
   });
 
-  function createCellElement(params = {}, prefix) {
-    const element = document.createElement("div");
-
-    element.setAttribute("data-cell-params", params);
-    element.setAttribute("data-cell-id", "foo");
-
-    if (prefix) {
-      element.setAttribute("data-cell-prefix", prefix);
-    }
-
-    return element;
-  }
-
-  function createCellChildElement(id, name) {
-    const element = document.createElement("div");
-
-    element.setAttribute("data-cell-parent-id", id);
-    element.setAttribute("data-cell-element", name);
-
-    return element;
-  }
-
   describe("#constructor()", () => {
     it("it accepts an element with cell parameters", () => {
       const element = createCellElement("{}");
@@ -154,6 +132,17 @@ describe("Cell", () => {
       cell.onDestroy = undefined;
     });
 
+    it("sets the destroyed property to true", () => {
+      const element = createCellElement("{}");
+      const cell = new Cell(element);
+
+      expect(cell.destroyed).to.be.undefined;
+
+      cell.destroy();
+
+      expect(cell.destroyed).to.be.true;
+    });
+
     it("returns the element that is destroyed", () => {
       const element = createCellElement("{}");
       const newElement = createCellElement("{}");
@@ -212,9 +201,10 @@ describe("Cell", () => {
   describe("#queryAll()", () => {
     it("query's the element", () => {
       const element = createCellElement("{}");
-      const querySelectorAll = stub(element, "querySelectorAll").callsFake(
-        () => []
-      );
+      const querySelectorAll = stub(
+        element,
+        "querySelectorAll"
+      ).callsFake(() => []);
 
       const cell = new Cell(element);
 
@@ -229,9 +219,10 @@ describe("Cell", () => {
   describe("#queryScopedAll()", () => {
     it("query's the element", () => {
       const element = createCellElement("{}", "css_");
-      const querySelectorAll = stub(element, "querySelectorAll").callsFake(
-        () => []
-      );
+      const querySelectorAll = stub(
+        element,
+        "querySelectorAll"
+      ).callsFake(() => []);
 
       const cell = new Cell(element);
 
@@ -258,4 +249,26 @@ describe("Cell", () => {
       expect(callback).to.have.been.calledWithExactly("value");
     });
   });
+
+  function createCellElement(params = {}, prefix) {
+    const element = document.createElement("div");
+
+    element.setAttribute("data-cell-params", params);
+    element.setAttribute("data-cell-id", "foo");
+
+    if (prefix) {
+      element.setAttribute("data-cell-prefix", prefix);
+    }
+
+    return element;
+  }
+
+  function createCellChildElement(id, name) {
+    const element = document.createElement("div");
+
+    element.setAttribute("data-cell-parent-id", id);
+    element.setAttribute("data-cell-element", name);
+
+    return element;
+  }
 });
