@@ -135,15 +135,5 @@ describe("Builder", () => {
 
       expect(Builder.findAndBuild()).to.eql([newCell, activeCell]);
     });
-
-    it("shows a warning if a cell doesn't exist", () => {
-      const newElement = createCellElement("{}");
-
-      const warn = stub(console, "warn");
-
-      Builder.findAndBuild();
-
-      expect(warn).to.have.been.calledWith("Cell with name Cell not found");
-    });
   });
 });

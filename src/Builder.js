@@ -78,7 +78,7 @@ export default {
   },
 
   /**
-   * Find and build or relaod cells currently available on the page
+   * Find and build or reload cells currently available on the page
    *
    * @return {Cell[]}
    */
@@ -87,17 +87,10 @@ export default {
       .call(document.querySelectorAll("[data-cell]"), element => {
         const cellName = this.getCellName(element);
         const cellConstructor = this.availableCells[cellName];
-        const foundCell = this.findByElement(element);
 
-        if (!cellConstructor) {
-          console &&
-            console.warn &&
-            console.warn(`Cell with name ${cellName} not found`);
-
-          return;
+        if (cellConstructor) {
+          return this.findByElement(element) || new cellConstructor(element);
         }
-
-        return foundCell || new cellConstructor(element);
       })
       .filter(cell => cell);
   },
